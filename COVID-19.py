@@ -10,7 +10,11 @@ from scipy.optimize import curve_fit
 from functions import Days, After, sigmoid
 from data import new_diagnosis
 
-date = Days()
+# default start time 2020 01 23
+after_n_days = 30
+y, m, d = After(after_n_days,2020,1,23)
+date = Days(y,m,d)
+new_diagnosis = new_diagnosis[after_n_days:]
 
 diagnosis = []
 for i in range(len(new_diagnosis)):

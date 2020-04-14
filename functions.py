@@ -8,6 +8,10 @@ def Days(year=2020, month=1, day=23):
 
     while True:
         date.append(str(year)+'-'+str(month)+'-'+str(day))
+        
+        if (year==dt.year)and(month==dt.month)and(day==dt.day):
+            break
+        
         day += 1
         
         if (month==1)|(month==3)|(month==5)|(month==7)|(month==8)|(month==10)|(month==12):
@@ -32,18 +36,19 @@ def Days(year=2020, month=1, day=23):
             month == 1
             year += 1
 
-        if (year==dt.year)and(month==dt.month)and(day==dt.day):
-            break
-
     return date
 
-def After(days):
-    dt = datetime.now()
-    year = dt.year
-    month = dt.month
-    day = dt.day
+def After(days, year=None, month=None, day=None):
+    if not year:
+        dt = datetime.now()
+        year = dt.year
+        month = dt.month
+        day = dt.day
 
     while True:
+        if days == 0:
+            break
+        
         day += 1
 
         if (month==1)|(month==3)|(month==5)|(month==7)|(month==8)|(month==10)|(month==12):
@@ -69,8 +74,6 @@ def After(days):
             year += 1
 
         days -= 1
-        if days == 0:
-            break
 
     return year, month, day
 
@@ -79,4 +82,10 @@ def sigmoid(x, k=1, t=0, m=1):
 
 if __name__ == '__main__':
     date = Days()
-    print(date[-1:])
+    print(date[-1:][0])
+
+    after_n_days = 0
+    y, m, d = After(after_n_days,2020,1,23)
+    date = Days(y,m,d)
+    print(date)
+    print(f'y={y},m={m},d={d}')
